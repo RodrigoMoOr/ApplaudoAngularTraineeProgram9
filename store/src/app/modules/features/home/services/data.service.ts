@@ -17,5 +17,19 @@ export class DataService {
     return this.http.get<IAPIResponse>(this.BASE_URL + this.path);
   }
 
-  getBySlug() {}
+  getAllWithQueryParams(resources: string): Observable<IAPIResponse> {
+    return this.http.get<IAPIResponse>(this.BASE_URL + this.path, {
+      params: {
+        include: resources,
+      },
+    });
+  }
+
+  getBySlug(slug: string, resources: string): Observable<IAPIResponse> {
+    return this.http.get<IAPIResponse>(this.BASE_URL + this.path + '/' + slug, {
+      params: {
+        include: resources,
+      },
+    });
+  }
 }

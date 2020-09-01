@@ -30,8 +30,10 @@ export class HomeLayoutComponent implements OnInit {
   }
 
   getProducts(): void {
-    this.productsService.getAll().subscribe((prodsResponse) => {
-      this.products = prodsResponse.data;
-    });
+    this.productsService
+      .getAllWithQueryParams('image_attachment.blob,category')
+      .subscribe((prodsResponse) => {
+        this.products = prodsResponse.data;
+      });
   }
 }
