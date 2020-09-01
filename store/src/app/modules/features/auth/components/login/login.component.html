@@ -1,1 +1,38 @@
-<p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <h1>{{ title }}</h1>
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <mat-icon matPrefix>mail</mat-icon>
+    <input
+      formControlName="email"
+      matInput
+      placeholder="e.g. roan98"
+      required
+    />
+    <mat-error *ngIf="loginForm.get('email').invalid">
+      <ng-container *ngIf="loginForm.get('email').errors.required"
+        >Email is required</ng-container
+      >
+      <ng-container *ngIf="loginForm.get('email').errors.pattern"
+        >Email is invalid</ng-container
+      >
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <mat-icon matPrefix>mail</mat-icon>
+    <input
+      formControlName="password"
+      matInput
+      placeholder="e.g. roan98"
+      type="password"
+      required
+    />
+    <mat-error *ngIf="loginForm.get('password').invalid">
+      <ng-container *ngIf="loginForm.get('password').errors.required"
+        >Password is required</ng-container
+      >
+    </mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="primary">Login</button>
+</form>

@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { IProduct } from './../../common/interfaces/product-response.interface';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
+  @Input() product: IProduct;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

@@ -1,0 +1,9 @@
+mat-card {
+  margin: 16px 16px 0 16px;
+}
+
+@media (min-width: 768px) {
+  mat-card {
+    margin: 0;
+  }
+}
