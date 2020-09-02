@@ -24,6 +24,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'cart',
+    loadChildren: () =>
+      import('./modules/features/cart/cart.module').then(
+        (module) => module.CartModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
