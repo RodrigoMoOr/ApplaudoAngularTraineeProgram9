@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { IProduct } from './../../../../shared/interfaces/product-response.interface';
 import { ProductsService } from './../../../../shared/services/products.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-layout',
@@ -27,7 +27,7 @@ export class ProductLayoutComponent implements OnInit {
     });
   }
 
-  getProduct(slug: string) {
+  getProduct(slug: string): void {
     this.productsService
       .getBySlug(slug, 'image_attachment.blob,category,master')
       .subscribe((response) => {

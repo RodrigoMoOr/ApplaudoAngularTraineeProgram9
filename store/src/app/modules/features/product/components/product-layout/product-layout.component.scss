@@ -17,9 +17,15 @@ img {
 mat-card {
   margin-top: 16px;
   width: 100%;
-}
 
-mat-card-actions {
-  display: flex;
-  justify-content: space-around;
+  mat-card-content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  mat-card-actions {
+    display: flex;
+    justify-content: space-around;
+  }
 }

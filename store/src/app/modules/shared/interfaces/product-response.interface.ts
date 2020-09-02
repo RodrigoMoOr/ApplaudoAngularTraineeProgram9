@@ -15,4 +15,9 @@ export interface IProduct {
     id: number;
     url: string;
   };
+  master: {
+    price: string;
+    promotional_price: string;
+    stock: number;
+  };
 }

@@ -1,21 +1,46 @@
 <h1>Detalles del Producto</h1>
 <img [src]="product?.image.url" />
-<h3>Name {{ product?.name }}</h3>
+<h3>Name: {{ product?.name }}</h3>
 <h4>Category: {{ product?.category.name }}</h4>
 <span>About: {{ product?.description }}</span>
 <mat-card>
   <mat-card-header>
     <mat-card-title>Product Information</mat-card-title>
   </mat-card-header>
-  <mat-card-content> info here </mat-card-content>
+  <mat-card-content>
+    <span>
+      Price<br />
+      <b>{{ product?.master.price | currency }}</b>
+    </span>
+    <span>
+      Promo<br />
+      <b>{{ product?.master.price | currency }}</b>
+    </span>
+    <span>
+      Available<br />
+      <b>{{ product?.master.stock }}</b>
+    </span>
+    <span>
+      Likes<br />
+      <b>{{ product?.likes_up_count }}</b>
+    </span>
+    <span>
+      Dislikes<br />
+      <b>{{ product?.likes_down_count }}</b>
+    </span>
+    <span>
+      Added on<br />
+      <b>{{ product?.published_at | date }}</b>
+    </span>
+  </mat-card-content>
   <mat-card-actions>
-    <button mat-fab color="primary">
+    <button mat-fab color="accent">
       <mat-icon>thumb_up</mat-icon>
     </button>
-    <button mat-fab color="primary">
+    <button mat-fab color="accent">
       <mat-icon>thumb_down</mat-icon>
     </button>
-    <button mat-fab color="primary">
+    <button mat-fab color="accent">
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </mat-card-actions>
