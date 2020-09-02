@@ -5,9 +5,12 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AuthService } from './services/auth.service';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { InfoCardComponent } from './components/info-card/info-card.component';
 
 @NgModule({
   imports: [
@@ -17,9 +20,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [AuthService],
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, InfoCardComponent],
   exports: [NavbarComponent],
+  entryComponents: [InfoCardComponent],
 })
 export class CoreModule {}
