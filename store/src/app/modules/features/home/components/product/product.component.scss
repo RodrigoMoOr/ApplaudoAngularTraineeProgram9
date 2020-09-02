@@ -1,5 +1,9 @@
 mat-card {
   margin: 16px 16px 0 16px;
+
+  img {
+    background-color: white;
+  }
 }
 
 @media (min-width: 768px) {
@@ -7,9 +11,8 @@ mat-card {
     margin: 0;
 
     img {
-      object-fit: cover;
+      object-fit: contain;
       height: 360px;
-      width: 360px;
     }
   }
 }
@@ -18,7 +21,6 @@ mat-card {
   mat-card {
     img {
       height: 320px;
-      width: 320px;
     }
   }
 }
@@ -27,7 +29,6 @@ mat-card {
   mat-card {
     img {
       height: 340px;
-      width: 340px;
     }
   }
 }
@@ -35,8 +36,7 @@ mat-card {
 @media (min-width: 2560px) {
   mat-card {
     img {
-      height: 360px;
-      width: 498.2px;
+      height: 340px;
     }
   }
 }
