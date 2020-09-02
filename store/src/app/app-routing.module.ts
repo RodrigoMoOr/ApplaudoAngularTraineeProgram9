@@ -17,6 +17,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'product/:name',
+    loadChildren: () =>
+      import('./modules/features/product/product.module').then(
+        (module) => module.ProductModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },

@@ -1,8 +1,9 @@
-import { ICategory } from './../../common/interfaces/category-response.interface';
-import { IProduct } from './../../common/interfaces/product-response.interface';
-import { CategoriesService } from './../../services/categories.service';
-import { ProductsService } from './../../services/products.service';
 import { Component, OnInit } from '@angular/core';
+
+import { IProduct } from 'src/app/modules/shared/interfaces/product-response.interface';
+import { ICategory } from 'src/app/modules/shared/interfaces/category-response.interface';
+import { CategoriesService } from 'src/app/modules/shared/services/categories.service';
+import { ProductsService } from 'src/app/modules/shared/services/products.service';
 
 @Component({
   selector: 'app-home-layout',

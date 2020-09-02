@@ -9,6 +9,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
+import { CategoriesService } from './services/categories.service';
+import { ProductsService } from './services/products.service';
+
 @NgModule({
   exports: [
     CommonModule,
@@ -21,5 +24,6 @@ import { MatCardModule } from '@angular/material/card';
     MatListModule,
     MatCardModule,
   ],
+  providers: [CategoriesService, ProductsService],
 })
 export class SharedModule {}

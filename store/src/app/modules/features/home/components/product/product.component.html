@@ -1,5 +1,5 @@
 <mat-card>
-  <mat-card-header>
+  <mat-card-header [routerLink]="['/product/', product.slug]">
     <mat-card-title>{{ product.name }}</mat-card-title>
   </mat-card-header>
   <img mat-card-image [src]="product.image?.url" alt="" />
