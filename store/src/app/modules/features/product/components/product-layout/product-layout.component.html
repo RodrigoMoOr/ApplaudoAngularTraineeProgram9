@@ -1,1 +1,22 @@
-<p>product-layout works!</p>
+<h1>Detalles del Producto</h1>
+<img [src]="product?.image.url" />
+<h3>Name {{ product?.name }}</h3>
+<h4>Category: {{ product?.category.name }}</h4>
+<span>About: {{ product?.description }}</span>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Product Information</mat-card-title>
+  </mat-card-header>
+  <mat-card-content> info here </mat-card-content>
+  <mat-card-actions>
+    <button mat-fab color="primary">
+      <mat-icon>thumb_up</mat-icon>
+    </button>
+    <button mat-fab color="primary">
+      <mat-icon>thumb_down</mat-icon>
+    </button>
+    <button mat-fab color="primary">
+      <mat-icon>add_shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
