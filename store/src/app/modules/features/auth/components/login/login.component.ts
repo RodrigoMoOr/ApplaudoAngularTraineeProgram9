@@ -1,3 +1,4 @@
+import { AuthService } from './../../../../core/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -18,13 +19,16 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {}
 
   login(): void {
-    console.log(this.loginForm.value);
-    this.navigateTo('');
+    this.authService.login(this.loginForm.value).subscribe((loginRespone) => {
+      if (loginRespone) {
+        this.navigateTo('');
+      }
+    });
   }
 
   private navigateTo(path: string): void {

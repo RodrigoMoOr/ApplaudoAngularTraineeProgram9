@@ -3,6 +3,8 @@ export interface IAPIResponse {
 }
 
 export interface ILoginResponse {
-  token: string;
-  user: {};
+  data: {
+    token: string;
+    user: {};
+  };
 }

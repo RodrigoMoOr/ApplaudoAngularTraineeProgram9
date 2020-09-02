@@ -5,8 +5,11 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { environment } from './../../../../environments/environment';
-import { IAPIResponse } from './../common/interfaces/api-responses.interface';
-import { ICredentials } from './../common/interfaces/login-credentials.interface';
+import { ILoginResponse } from './../common/interfaces/api-responses.interface';
+import {
+  ICredentials,
+  ILoginPayload,
+} from './../common/interfaces/login-credentials.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +25,15 @@ export class AuthService {
   }
 
   login(credentials: ICredentials): Observable<boolean> {
+    const loginPayload: ILoginPayload = {
+      data: credentials,
+    };
     return this.http
-      .post<IAPIResponse>(this.BASE_URL + '/users/login', credentials)
+      .post<ILoginResponse>(this.BASE_URL + '/users/login', loginPayload)
       .pipe(
-        map((response: IAPIResponse) => {
+        map((response: ILoginResponse) => {
           if (response.data && response.data.token) {
+            localStorage.setItem('token', response.data.token);
             return true;
           }
         }),
