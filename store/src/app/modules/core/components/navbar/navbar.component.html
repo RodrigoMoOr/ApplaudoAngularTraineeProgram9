@@ -4,16 +4,31 @@
   </button>
   <span>Store</span>
   <span class="spacer"></span>
-  <button mat-icon-button class="navbar-menu-icon" [routerLink]="['']">
+  <button
+    mat-icon-button
+    class="navbar-menu-icon"
+    [routerLink]="['']"
+    *ngIf="isLogged$ | async"
+  >
     <mat-icon>home</mat-icon>
   </button>
-  <button mat-icon-button class="navbar-menu-icon" [routerLink]="['/cart']">
+  <button
+    mat-icon-button
+    class="navbar-menu-icon"
+    [routerLink]="['/cart']"
+    *ngIf="isLogged$ | async"
+  >
     <mat-icon>shopping_cart</mat-icon>
   </button>
   <!-- <button mat-icon-button class="navbar-menu-icon">
     <mat-icon>search</mat-icon>
   </button> -->
-  <button mat-icon-button class="navbar-menu-icon" (click)="openDialog()">
+  <button
+    mat-icon-button
+    class="navbar-menu-icon"
+    (click)="openDialog()"
+    *ngIf="isLogged$ | async"
+  >
     <mat-icon>person</mat-icon>
   </button>
 </mat-toolbar>

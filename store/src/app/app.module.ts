@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AuthService } from './modules/features/auth/services/auth.service';
 
-import { reducers, metaReducers } from './store/reducers/index';
+import { authReducer } from './store/auth.store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,9 +17,7 @@ import { reducers, metaReducers } from './store/reducers/index';
     CoreModule,
     AppRoutingModule,
     AuthModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers,
-    }),
+    StoreModule.forRoot({ auth: authReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
