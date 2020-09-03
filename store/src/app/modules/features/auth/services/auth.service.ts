@@ -2,13 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { tap, map, catchError } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import {
   ICredentials,
   ILoginPayload,
 } from '../interfaces/login-credentials.interface';
-import { ILoginResponse } from '../interfaces/api-responses.interface';
+import {
+  IAPIResponse,
+  ILoginResponse,
+} from '../interfaces/api-responses.interface';
 import { environment } from '../../../../../environments/environment';
 
 @Injectable({
@@ -29,9 +32,9 @@ export class AuthService {
       data: credentials,
     };
     return this.http
-      .post<ILoginResponse>(this.BASE_URL + '/users/login', loginPayload)
+      .post<IAPIResponse>(this.BASE_URL + '/users/login', loginPayload)
       .pipe(
-        tap((response: ILoginResponse) => {
+        map((response: IAPIResponse) => {
           if (response.data && response.data.token) {
             localStorage.setItem('token', response.data.token);
             this.updateSessionState(true);

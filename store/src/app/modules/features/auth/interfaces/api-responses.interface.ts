@@ -1,14 +1,14 @@
 export interface IAPIResponse {
-  data: any;
+  data: ILoginResponse;
 }
 
 export interface ILoginResponse {
-  data: {
-    token: string;
-    user: {
-      id: number;
-      email: string;
-      name: string;
-    };
-  };
+  token: string;
+  user: IUser;
+}
+
+export interface IUser {
+  id: number;
+  email: string;
+  name: string;
 }

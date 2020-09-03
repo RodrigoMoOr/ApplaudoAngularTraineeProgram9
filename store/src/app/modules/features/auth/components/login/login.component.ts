@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ILoginResponse } from '../../interfaces/api-responses.interface';
 
+import { Store } from '@ngrx/store';
+import { AppState } from './../../../../../store/reducers/index';
+import { login } from './../../../../../store/actions/login.actions';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +25,11 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {}
 
@@ -29,7 +37,8 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.loginForm.value)
       .subscribe((loginRespone: ILoginResponse) => {
-        if (loginRespone && loginRespone.data.token) {
+        if (loginRespone && loginRespone.token) {
+          this.store.dispatch(login(loginRespone.user));
           this.navigateTo('');
         }
       });
