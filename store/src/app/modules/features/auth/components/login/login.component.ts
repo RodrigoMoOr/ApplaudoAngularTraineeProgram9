@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../services/auth.service';
+import { ILoginResponse } from '../../interfaces/api-responses.interface';
 
 @Component({
   selector: 'app-login',
@@ -25,11 +26,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(): void {
-    this.authService.login(this.loginForm.value).subscribe((loginRespone) => {
-      if (loginRespone) {
-        this.navigateTo('');
-      }
-    });
+    this.authService
+      .login(this.loginForm.value)
+      .subscribe((loginRespone: ILoginResponse) => {
+        if (loginRespone && loginRespone.data.token) {
+          this.navigateTo('');
+        }
+      });
   }
 
   private navigateTo(path: string): void {

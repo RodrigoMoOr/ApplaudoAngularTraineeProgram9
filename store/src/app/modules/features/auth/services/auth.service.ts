@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 
-import { environment } from 'src/environments/environment';
 import {
   ICredentials,
   ILoginPayload,
 } from '../interfaces/login-credentials.interface';
 import { ILoginResponse } from '../interfaces/api-responses.interface';
+import { environment } from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -24,18 +24,18 @@ export class AuthService {
     this.getLoggedStatus();
   }
 
-  login(credentials: ICredentials): Observable<boolean> {
+  login(credentials: ICredentials): Observable<ILoginResponse> {
     const loginPayload: ILoginPayload = {
       data: credentials,
     };
     return this.http
       .post<ILoginResponse>(this.BASE_URL + '/users/login', loginPayload)
       .pipe(
-        map((response: ILoginResponse) => {
+        tap((response: ILoginResponse) => {
           if (response.data && response.data.token) {
             localStorage.setItem('token', response.data.token);
             this.updateSessionState(true);
-            return true;
+            return response.data;
           }
         }),
         catchError((err) => {
