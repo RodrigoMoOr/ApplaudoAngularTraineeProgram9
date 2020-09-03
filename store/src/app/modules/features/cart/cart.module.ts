@@ -1,7 +1,7 @@
 import { CartRoutingModule } from './cart.module.routing';
 import { NgModule } from '@angular/core';
 
-import { CartLayoutComponent } from './cart-layout/cart-layout.component';
+import { CartLayoutComponent } from './components/cart-layout/cart-layout.component';
 import { SharedModule } from './../../shared/shared.module';
 
 @NgModule({

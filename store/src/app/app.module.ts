@@ -8,7 +8,8 @@ import { AuthModule } from './modules/features/auth/auth.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 
-import { authReducer } from './store/auth.store';
+import { appReducer, AppEffects } from './store/app.store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,11 +17,12 @@ import { authReducer } from './store/auth.store';
     CoreModule,
     AppRoutingModule,
     AuthModule,
-    StoreModule.forRoot({ auth: authReducer }),
+    StoreModule.forRoot({ app: appReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot([AppEffects]),
   ],
   bootstrap: [AppComponent],
 })

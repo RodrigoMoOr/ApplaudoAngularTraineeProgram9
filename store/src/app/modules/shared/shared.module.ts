@@ -8,9 +8,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 import { CategoriesService } from './services/categories.service';
 import { ProductsService } from './services/products.service';
+import { AppGuard } from './../core/guards/app.guard';
 
 @NgModule({
   exports: [
@@ -23,7 +25,8 @@ import { ProductsService } from './services/products.service';
     MatSidenavModule,
     MatListModule,
     MatCardModule,
+    MatTableModule,
   ],
-  providers: [CategoriesService, ProductsService],
+  providers: [CategoriesService, ProductsService, AppGuard],
 })
 export class SharedModule {}

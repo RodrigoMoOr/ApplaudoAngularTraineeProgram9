@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { ILoginResponse } from '../../interfaces/api-responses.interface';
 
 import { Store } from '@ngrx/store';
-import { login, AuthState } from '../../../../../store/auth.store';
+import { AppState, login } from './../../../../../store/app.store';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private store: Store<AuthState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {}
@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
       .login(this.loginForm.value)
       .subscribe((loginRespone: ILoginResponse) => {
         if (loginRespone && loginRespone.token) {
-          this.store.dispatch(login({ user: loginRespone.user }));
+          this.store.dispatch(
+            login({ user: loginRespone.user, cart: undefined })
+          );
           this.navigateTo('');
         }
       });

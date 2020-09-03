@@ -7,7 +7,7 @@ import { Store, select } from '@ngrx/store';
 
 import { InfoCardComponent } from './../info-card/info-card.component';
 import { AuthService } from '../../../features/auth/services/auth.service';
-import { AuthState, isLogged, logout } from 'src/app/store/auth.store';
+import { AppState, logout, isLogged } from 'src/app/store/app.store';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private authService: AuthService,
-    private store: Store<AuthState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {

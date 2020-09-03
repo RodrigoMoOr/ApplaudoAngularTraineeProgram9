@@ -14,11 +14,11 @@ export class DataService {
   constructor(private http: HttpClient, private path: string) {}
 
   getAll(): Observable<IAPIResponse> {
-    return this.http.get<IAPIResponse>(this.BASE_URL + this.path);
+    return this.http.get<IAPIResponse>(this.BASE_URL + '/' + this.path);
   }
 
   getAllWithQueryParams(resources: string): Observable<IAPIResponse> {
-    return this.http.get<IAPIResponse>(this.BASE_URL + this.path, {
+    return this.http.get<IAPIResponse>(this.BASE_URL + '/' + this.path, {
       params: {
         include: resources,
       },
