@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './modules/features/auth/auth.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import { AuthService } from './modules/features/auth/services/auth.service';
 
 import { authReducer } from './store/auth.store';
 
@@ -23,7 +22,6 @@ import { authReducer } from './store/auth.store';
       logOnly: environment.production,
     }),
   ],
-  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
