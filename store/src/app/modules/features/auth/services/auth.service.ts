@@ -4,12 +4,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { environment } from './../../../../environments/environment';
-import { ILoginResponse } from './../common/interfaces/api-responses.interface';
+import { environment } from 'src/environments/environment';
 import {
   ICredentials,
   ILoginPayload,
-} from './../common/interfaces/login-credentials.interface';
+} from '../interfaces/login-credentials.interface';
+import { ILoginResponse } from '../interfaces/api-responses.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +34,7 @@ export class AuthService {
         map((response: ILoginResponse) => {
           if (response.data && response.data.token) {
             localStorage.setItem('token', response.data.token);
+            this.updateSessionState(true);
             return true;
           }
         }),

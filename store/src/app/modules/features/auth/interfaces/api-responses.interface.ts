@@ -5,6 +5,10 @@ export interface IAPIResponse {
 export interface ILoginResponse {
   data: {
     token: string;
-    user: {};
+    user: {
+      id: number;
+      email: string;
+      name: string;
+    };
   };
 }
