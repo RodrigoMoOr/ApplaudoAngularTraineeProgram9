@@ -6,6 +6,7 @@ import {
   HttpHandler,
   HttpEvent,
   HttpErrorResponse,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
@@ -17,9 +18,12 @@ export class TokenInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    /**
-     * TODO: implement header with token
-     */
+    const headers = new HttpHeaders({
+      token: localStorage.getItem('token'),
+    });
+
+    const reqClone = req.clone({ headers });
+
     return next.handle(req).pipe(catchError(this.handleError));
   }
 

@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
-import { AuthService } from '../../services/auth.service';
-import { ILoginResponse } from '../../interfaces/api-responses.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { AuthService } from '../../common/services/auth.service';
+import { ILoginResponse } from '../../common/interfaces/api-responses.interface';
+import { SnackbarComponent } from '../../../../shared/components/snackbar/snackbar.component';
 
 import { Store } from '@ngrx/store';
 import { AppState, login } from './../../../../../store/app.store';
@@ -27,25 +31,37 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
 
   login(): void {
-    this.authService
-      .login(this.loginForm.value)
-      .subscribe((loginRespone: ILoginResponse) => {
+    this.authService.login(this.loginForm.value).subscribe(
+      (loginRespone: ILoginResponse) => {
         if (loginRespone && loginRespone.token) {
+          this.openSnackbar('Login successful');
           this.store.dispatch(
             login({ user: loginRespone.user, cart: undefined })
           );
           this.navigateTo('');
         }
-      });
+      },
+      (error: HttpErrorResponse) => {
+        this.openSnackbar(error.message);
+      }
+    );
   }
 
   private navigateTo(path: string): void {
     this.router.navigate([path]);
+  }
+
+  private openSnackbar(message: string): void {
+    this._snackBar.openFromComponent(SnackbarComponent, {
+      data: message,
+      duration: 3000,
+    });
   }
 }

@@ -12,7 +12,7 @@ import {
   IAPIResponse,
   ILoginResponse,
 } from '../interfaces/api-responses.interface';
-import { environment } from '../../../../../environments/environment';
+import { environment } from '../../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

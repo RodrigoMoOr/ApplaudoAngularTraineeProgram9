@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 
 import { InfoCardComponent } from './../info-card/info-card.component';
-import { AuthService } from '../../../features/auth/services/auth.service';
+import { AuthService } from '../../../features/auth/common/services/auth.service';
 import { AppState, logout, isLogged } from 'src/app/store/app.store';
 
 @Component({

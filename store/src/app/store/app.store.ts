@@ -14,7 +14,7 @@ import {
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 
 import { ICart } from './../modules/features/cart/interfaces/cart-interfaces';
-import { IUser } from './../modules/features/auth/interfaces/api-responses.interface';
+import { IUser } from './../modules/features/auth/common/interfaces/api-responses.interface';
 
 /**
  * App States

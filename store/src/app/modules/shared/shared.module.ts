@@ -9,10 +9,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MAT_SNACK_BAR_DATA } from '@angular/material/snack-bar';
 
 import { CategoriesService } from './services/categories.service';
 import { ProductsService } from './services/products.service';
 import { AppGuard } from './../core/guards/app.guard';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
   exports: [
@@ -26,7 +29,9 @@ import { AppGuard } from './../core/guards/app.guard';
     MatListModule,
     MatCardModule,
     MatTableModule,
+    MatSnackBarModule,
   ],
   providers: [CategoriesService, ProductsService, AppGuard],
+  declarations: [SnackbarComponent],
 })
 export class SharedModule {}
