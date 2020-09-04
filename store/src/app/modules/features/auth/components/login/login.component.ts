@@ -5,11 +5,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { Store } from '@ngrx/store';
+
 import { AuthService } from '../../common/services/auth.service';
 import { ILoginResponse } from '../../common/interfaces/api-responses.interface';
 import { SnackbarComponent } from '../../../../shared/components/snackbar/snackbar.component';
-
-import { Store } from '@ngrx/store';
 import { AppState, login } from './../../../../../store/app.store';
 
 @Component({

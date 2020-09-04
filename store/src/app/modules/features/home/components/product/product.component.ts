@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { IProduct } from '../../../../shared/interfaces/product-response.interface';
+import { IProduct } from '../../../../shared/common/interfaces/product-response.interface';
 
 @Component({
   selector: 'app-product',

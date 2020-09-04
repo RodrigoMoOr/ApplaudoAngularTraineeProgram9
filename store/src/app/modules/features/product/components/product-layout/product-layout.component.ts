@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { IProduct } from './../../../../shared/interfaces/product-response.interface';
-import { ProductsService } from './../../../../shared/services/products.service';
+import { IProduct } from './../../../../shared/common/interfaces/product-response.interface';
+import { ProductsService } from './../../../../shared/common/services/products.service';
 
 @Component({
   selector: 'app-product-layout',

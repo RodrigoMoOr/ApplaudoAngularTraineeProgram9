@@ -13,7 +13,7 @@ import {
 } from '@ngrx/store';
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 
-import { ICart } from './../modules/features/cart/interfaces/cart-interfaces';
+import { ICart } from './../modules/features/cart/common/interfaces/cart-interfaces';
 import { IUser } from './../modules/features/auth/common/interfaces/api-responses.interface';
 
 /**
