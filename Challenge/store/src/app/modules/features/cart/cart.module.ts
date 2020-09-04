@@ -6,4 +6,4 @@ import { SharedModule } from './../../shared/shared.module';
   declarations: [],
   imports: [SharedModule],
 })
-export class HomeModule {}
+export class CartModule {}
