@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-card-header [routerLink]="['/home/products/', product.slug]">
+    <mat-card-title>{{ product.name }}</mat-card-title>
+  </mat-card-header>
+  <img
+    mat-card-image
+    [src]="product.image?.url || '../../../../../assets/images/def_product.jpg'"
+    alt=""
+  />
+  <mat-card-content>
+    <p>{{ product.description }}</p>
+    <span>Published: {{ product.published_at | date }}</span>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>DISLIKE</button>
+  </mat-card-actions>
+</mat-card>

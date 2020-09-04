@@ -1,0 +1,42 @@
+mat-card {
+  margin: 16px 16px 0 16px;
+
+  img {
+    background-color: white;
+  }
+}
+
+@media (min-width: 768px) {
+  mat-card {
+    margin: 0;
+
+    img {
+      object-fit: contain;
+      height: 360px;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  mat-card {
+    img {
+      height: 320px;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  mat-card {
+    img {
+      height: 340px;
+    }
+  }
+}
+
+@media (min-width: 2560px) {
+  mat-card {
+    img {
+      height: 340px;
+    }
+  }
+}
