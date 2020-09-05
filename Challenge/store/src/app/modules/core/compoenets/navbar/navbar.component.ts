@@ -3,9 +3,13 @@ import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
+import { Store, select } from '@ngrx/store';
 
 import { AuthService } from '../../services/auth.service';
 import { InfoCardComponent } from '../info-card/info-card.component';
+import { UserState } from './../../../../store/states/app.states';
+import { isLogged } from '../../../../store/selectors/user.selectors';
+import { logout } from '../../../../store/actions/user.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +22,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store<UserState>
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +31,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   getUser(): void {
-    // this.isLogged$ = this.store.pipe(select(isLogged));
+    this.isLogged$ = this.store.pipe(select(isLogged));
   }
 
   openDialog(): void {
@@ -41,7 +46,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    // this.store.dispatch(logout());
+    this.store.dispatch(logout());
     this.authService.logout();
     this.router.navigate(['/login']);
   }

@@ -1,13 +1,16 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { ILoginResponse } from './../../../../core/interfaces/api-requests.interface';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from './../../../../core/services/auth.service';
 import { SnackbarComponent } from './../snackbar/snackbar.component';
+import { ILoginResponse } from './../../../../core/interfaces/api-requests.interface';
+import { UserState } from './../../../../../store/states/app.states';
+import { login } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +34,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private store: Store<UserState>
   ) {}
 
   ngOnInit(): void {}
@@ -41,9 +45,7 @@ export class LoginComponent implements OnInit {
       (loginRespone: ILoginResponse) => {
         if (loginRespone && loginRespone.token) {
           this.openSnackBar('Login successful');
-          // this.store.dispatch(
-          //   login({ user: loginRespone.user, cart: undefined })
-          // );
+          this.store.dispatch(login({ user: loginRespone.user }));
           this.router.navigate(['/home']);
         }
       },
