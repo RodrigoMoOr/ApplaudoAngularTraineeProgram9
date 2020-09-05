@@ -1,33 +1,18 @@
-import { EntityState, createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 import { createReducer, Action, on } from '@ngrx/store';
 
+import * as CategoryStates from '../states/category.states';
 import * as CategoryActions from '../actions/category.actions';
 
-export interface Category {
-  id: number;
-  slug: string;
-  name: string;
-}
-
-export interface CategoryState extends EntityState<Category> {}
-
-export const categoryAdapter: EntityAdapter<Category> = createEntityAdapter<
-  Category
->();
-
-const initialCategory: CategoryState = categoryAdapter.getInitialState();
-
 const categoryReducer = createReducer(
-  initialCategory,
+  CategoryStates.initialCategory,
   on(CategoryActions.addCategories, (state, action) => {
-    console.log(action.categories);
-    return categoryAdapter.addMany(action.categories, state);
+    return CategoryStates.categoryAdapter.addMany(action.categories, state);
   })
 );
 
 export function reducer(
-  state: CategoryState | undefined,
+  state: CategoryStates.CategoryState | undefined,
   action: Action
-): CategoryState {
+): CategoryStates.CategoryState {
   return categoryReducer(state, action);
 }

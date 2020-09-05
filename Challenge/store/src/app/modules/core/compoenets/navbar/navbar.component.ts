@@ -7,7 +7,7 @@ import { Store, select } from '@ngrx/store';
 
 import { AuthService } from '../../services/auth.service';
 import { InfoCardComponent } from '../info-card/info-card.component';
-import { UserState } from './../../../../store/states/app.states';
+import { UserState } from '../../../../store/states/user.states';
 import { isLogged } from '../../../../store/selectors/user.selectors';
 import { logout } from '../../../../store/actions/user.actions';
 

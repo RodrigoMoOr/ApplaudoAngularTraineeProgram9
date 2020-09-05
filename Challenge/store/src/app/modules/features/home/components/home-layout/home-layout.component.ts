@@ -6,7 +6,7 @@ import { IProduct } from '../../interfaces/products.interface';
 import { ICategory } from './../../interfaces/categories.interface';
 import { ProductsService } from './../../services/products.service';
 import { CategoriesService } from './../../services/categories.service';
-import { CategoryState } from 'src/app/store/reducers/category.reducers';
+import { CategoryState } from 'src/app/store/states/category.states';
 import { addCategories } from './../../../../../store/actions/category.actions';
 
 @Component({

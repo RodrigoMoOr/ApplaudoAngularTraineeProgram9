@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { AuthService } from './../../../../core/services/auth.service';
 import { SnackbarComponent } from './../snackbar/snackbar.component';
 import { ILoginResponse } from '../../../../core/interfaces/api-responses.interface';
-import { UserState } from './../../../../../store/states/app.states';
+import { UserState } from '../../../../../store/states/user.states';
 import { login } from 'src/app/store/actions/user.actions';
 
 @Component({
