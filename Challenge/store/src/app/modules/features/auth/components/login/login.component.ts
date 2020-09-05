@@ -8,7 +8,7 @@ import { Store } from '@ngrx/store';
 
 import { AuthService } from './../../../../core/services/auth.service';
 import { SnackbarComponent } from './../snackbar/snackbar.component';
-import { ILoginResponse } from './../../../../core/interfaces/api-requests.interface';
+import { ILoginResponse } from '../../../../core/interfaces/api-responses.interface';
 import { UserState } from './../../../../../store/states/app.states';
 import { login } from 'src/app/store/actions/user.actions';
 

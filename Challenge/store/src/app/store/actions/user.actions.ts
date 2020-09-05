@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { IUser } from '../../modules/core/interfaces/api-requests.interface';
+import { IUser } from '../../modules/core/interfaces/api-responses.interface';
 
 export const login = createAction(
   '[Login Page] Login',

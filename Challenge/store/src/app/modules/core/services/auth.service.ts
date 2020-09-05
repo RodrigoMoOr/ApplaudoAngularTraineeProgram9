@@ -12,7 +12,7 @@ import {
 import {
   ILoginResponse,
   IAPIResponse,
-} from './../interfaces/api-requests.interface';
+} from '../interfaces/api-responses.interface';
 
 @Injectable({
   providedIn: 'root',

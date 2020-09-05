@@ -1,4 +1,4 @@
-import { IUser } from '../../modules/core/interfaces/api-requests.interface';
+import { IUser } from '../../modules/core/interfaces/api-responses.interface';
 
 export interface UserState {
   user: IUser;

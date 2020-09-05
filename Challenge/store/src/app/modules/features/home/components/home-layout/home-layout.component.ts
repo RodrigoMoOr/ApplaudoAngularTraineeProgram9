@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+
 import { IProduct } from '../../interfaces/products.interface';
 import { ICategory } from './../../interfaces/categories.interface';
 import { ProductsService } from './../../services/products.service';
 import { CategoriesService } from './../../services/categories.service';
+import { CategoryState } from 'src/app/store/reducers/category.reducers';
+import { addCategories } from './../../../../../store/actions/category.actions';
 
 @Component({
   selector: 'app-home-layout',
@@ -16,7 +20,8 @@ export class HomeLayoutComponent implements OnInit {
 
   constructor(
     private categoriesService: CategoriesService,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private store: Store<CategoryState>
   ) {}
 
   ngOnInit(): void {
@@ -27,6 +32,7 @@ export class HomeLayoutComponent implements OnInit {
   getCategories(): void {
     this.categoriesService.getAll().subscribe((catResponse) => {
       this.categories = catResponse.data;
+      this.store.dispatch(addCategories({ categories: this.categories }));
     });
   }
 

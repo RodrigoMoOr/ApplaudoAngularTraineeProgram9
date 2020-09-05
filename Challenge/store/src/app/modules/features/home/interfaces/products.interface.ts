@@ -1,7 +1,3 @@
-export interface IAPIResponse {
-  data: any;
-}
-
 export interface IProduct {
   id: number;
   slug: string;

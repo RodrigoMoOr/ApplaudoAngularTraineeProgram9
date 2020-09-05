@@ -4,7 +4,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { IAPIResponse } from '../interfaces/products.interface';
+import { IAPIResponse } from '../interfaces/api-response.interface';
 
 @Injectable({
   providedIn: 'root',
