@@ -1,3 +1,5 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { ILoginResponse } from './../../../../core/interfaces/api-requests.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -35,21 +37,20 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(): void {
-    this.openSnackBar('Snackbar opened');
-    // this.authService.login(this.loginForm.value).subscribe(
-    //   (loginRespone: ILoginResponse) => {
-    //     if (loginRespone && loginRespone.token) {
-    //       this.openSnackbar('Login successful');
-    //       this.store.dispatch(
-    //         login({ user: loginRespone.user, cart: undefined })
-    //       );
-    //       this.navigateTo('');
-    //     }
-    //   },
-    //   (error: HttpErrorResponse) => {
-    //     this.openSnackbar(error.message);
-    //   }
-    // );
+    this.authService.login(this.loginForm.value).subscribe(
+      (loginRespone: ILoginResponse) => {
+        if (loginRespone && loginRespone.token) {
+          this.openSnackBar('Login successful');
+          // this.store.dispatch(
+          //   login({ user: loginRespone.user, cart: undefined })
+          // );
+          this.router.navigate(['/home']);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.openSnackBar(error.message);
+      }
+    );
   }
 
   private openSnackBar(message: string): void {
