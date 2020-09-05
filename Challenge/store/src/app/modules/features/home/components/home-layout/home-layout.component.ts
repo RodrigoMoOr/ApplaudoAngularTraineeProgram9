@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
+import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 
 import { IProduct } from '../../interfaces/products.interface';
 import { ICategory } from './../../interfaces/categories.interface';
 import { ProductsService } from './../../services/products.service';
 import { CategoriesService } from './../../services/categories.service';
+import { NavbarService } from './../../../../core/services/navbar.service';
 import { CategoryState } from 'src/app/store/states/category.states';
 import { addCategories } from './../../../../../store/actions/category.actions';
 
@@ -14,15 +16,20 @@ import { addCategories } from './../../../../../store/actions/category.actions';
   templateUrl: './home-layout.component.html',
   styleUrls: ['./home-layout.component.scss'],
 })
-export class HomeLayoutComponent implements OnInit {
+export class HomeLayoutComponent implements OnInit, AfterViewInit {
   products: IProduct[];
   categories: ICategory[];
+  @ViewChild('sidenav') public sidenav: MatSidenav;
 
   constructor(
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
-    private store: Store<CategoryState>
+    private store: Store<CategoryState>,
+    private navbarService: NavbarService
   ) {}
+  ngAfterViewInit(): void {
+    this.navbarService.setSidenav(this.sidenav);
+  }
 
   ngOnInit(): void {
     this.getCategories();

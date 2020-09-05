@@ -13,7 +13,7 @@ export class DataService {
   constructor(
     private BASE_URL: string,
     private path: string,
-    private http: HttpClient
+    protected http: HttpClient
   ) {}
 
   getAll(): Observable<IAPIResponse> {

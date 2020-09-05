@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
 import { AuthService } from './services/auth.service';
+import { NavbarService } from './services/navbar.service';
 import { NavbarComponent } from './compoenets/navbar/navbar.component';
 import { InfoCardComponent } from './compoenets/info-card/info-card.component';
 
@@ -26,7 +27,7 @@ import { InfoCardComponent } from './compoenets/info-card/info-card.component';
     MatButtonModule,
   ],
   exports: [NavbarComponent],
-  providers: [AuthService],
+  providers: [AuthService, NavbarService],
   entryComponents: [InfoCardComponent],
 })
 export class CoreModule {}

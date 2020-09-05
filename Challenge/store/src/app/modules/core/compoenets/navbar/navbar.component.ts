@@ -1,3 +1,4 @@
+import { NavbarService } from './../../services/navbar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private router: Router,
     private authService: AuthService,
+    private navbarService: NavbarService,
     private store: Store<UserState>
   ) {}
 
@@ -43,6 +45,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.logout();
         }
       });
+  }
+
+  onSidenavToggle(): void {
+    this.navbarService.toggle();
   }
 
   logout(): void {
