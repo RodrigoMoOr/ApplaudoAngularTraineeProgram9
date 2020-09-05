@@ -1,20 +1,11 @@
-export interface IAPIResponse {
-  data: ILoginResponse;
-}
-
-export interface ILoginResponse {
-  token: string;
-  user: IUser;
-}
-
-export interface IUser {
+export interface User {
   id: number;
   email: string;
   name: string;
 }
 
 export interface UserState {
-  user: IUser;
+  user: User;
 }
 
 export const initialAppState: UserState = {

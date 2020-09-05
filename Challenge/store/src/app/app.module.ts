@@ -12,6 +12,7 @@ import { environment } from '../environments/environment';
 import * as fromUser from './store/reducers/user.reducers';
 import { UserEffects } from './store/effects/user.effects';
 import * as fromCategories from './store/reducers/category.reducers';
+import * as fromProducts from './store/reducers/product.reducers';
 
 /**
  * Auth module is eagerly loaded due to its basic functionality
@@ -25,6 +26,7 @@ import * as fromCategories from './store/reducers/category.reducers';
     StoreModule.forRoot({
       auth: fromUser.reducer,
       catories: fromCategories.reducer,
+      products: fromProducts.reducer,
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

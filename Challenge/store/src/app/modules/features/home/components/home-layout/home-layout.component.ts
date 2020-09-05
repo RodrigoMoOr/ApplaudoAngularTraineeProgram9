@@ -8,8 +8,10 @@ import { ICategory } from './../../interfaces/categories.interface';
 import { ProductsService } from './../../services/products.service';
 import { CategoriesService } from './../../services/categories.service';
 import { NavbarService } from './../../../../core/services/navbar.service';
-import { CategoryState } from 'src/app/store/states/category.states';
+import { CategoriesState } from 'src/app/store/states/category.states';
+import { AppState } from 'src/app/store/states/app.states';
 import { addCategories } from './../../../../../store/actions/category.actions';
+import { addProducts } from './../../../../../store/actions/product.actions';
 
 @Component({
   selector: 'app-home-layout',
@@ -24,7 +26,7 @@ export class HomeLayoutComponent implements OnInit, AfterViewInit {
   constructor(
     private categoriesService: CategoriesService,
     private productsService: ProductsService,
-    private store: Store<CategoryState>,
+    private store: Store<AppState>,
     private navbarService: NavbarService
   ) {}
   ngAfterViewInit(): void {
@@ -48,6 +50,7 @@ export class HomeLayoutComponent implements OnInit, AfterViewInit {
       .getAllWithQueryParams('image_attachment.blob,category')
       .subscribe((prodsResponse) => {
         this.products = prodsResponse.data;
+        this.store.dispatch(addProducts({ products: this.products }));
       });
   }
 }

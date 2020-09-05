@@ -4,15 +4,15 @@ import * as CategoryStates from '../states/category.states';
 import * as CategoryActions from '../actions/category.actions';
 
 const categoryReducer = createReducer(
-  CategoryStates.initialCategory,
+  CategoryStates.initialCategoriesState,
   on(CategoryActions.addCategories, (state, action) => {
-    return CategoryStates.categoryAdapter.addMany(action.categories, state);
+    return CategoryStates.categoriesAdapter.addMany(action.categories, state);
   })
 );
 
 export function reducer(
-  state: CategoryStates.CategoryState | undefined,
+  state: CategoryStates.CategoriesState | undefined,
   action: Action
-): CategoryStates.CategoryState {
+): CategoryStates.CategoriesState {
   return categoryReducer(state, action);
 }
