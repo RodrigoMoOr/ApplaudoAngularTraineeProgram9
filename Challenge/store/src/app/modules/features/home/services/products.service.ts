@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { DataService } from './data.service';
 import { environment } from './../../../../../environments/environment';
@@ -14,15 +14,19 @@ export class ProductsService extends DataService {
     super(environment.apiUrl, 'products', http);
   }
 
-  // getProductsByCategory(resources: string, categoryId: number): Observable<IAPIResponse> {
+  getProductsByCategory(
+    resources: string,
+    categoryId: number
+  ): Observable<IAPIResponse> {
+    const params = new HttpParams({
+      fromObject: {
+        include: resources,
+        'filter[category_id_eq]': categoryId.toString(),
+      },
+    });
 
-  //   const params = {
-  //     include: resources,
-  //     filter: {
-  //       category_id_eq: categoryId,
-  //     }
-  //   };
-
-  //   return this.http.get<IAPIResponse>(environment.apiUrl + '/products', { params: { params } });
-  // }
+    return this.http.get<IAPIResponse>(environment.apiUrl + '/products', {
+      params,
+    });
+  }
 }

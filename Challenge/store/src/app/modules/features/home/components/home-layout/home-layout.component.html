@@ -6,7 +6,11 @@
         <div mat-line>Categories</div>
         <mat-divider></mat-divider>
       </mat-list-item>
-      <mat-list-item role="listitem" *ngFor="let category of categories">
+      <mat-list-item
+        role="listitem"
+        *ngFor="let category of categories"
+        (click)="getProductsByCategory(category)"
+      >
         <mat-icon mat-list-icon>category</mat-icon>
         <div mat-line>{{ category.name }}</div>
         <mat-divider></mat-divider>

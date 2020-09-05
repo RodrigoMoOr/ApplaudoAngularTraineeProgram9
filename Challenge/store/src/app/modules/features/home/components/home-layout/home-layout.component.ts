@@ -8,7 +8,6 @@ import { ICategory } from './../../interfaces/categories.interface';
 import { ProductsService } from './../../services/products.service';
 import { CategoriesService } from './../../services/categories.service';
 import { NavbarService } from './../../../../core/services/navbar.service';
-import { CategoriesState } from 'src/app/store/states/category.states';
 import { AppState } from 'src/app/store/states/app.states';
 import { addCategories } from './../../../../../store/actions/category.actions';
 import { addProducts } from './../../../../../store/actions/product.actions';
@@ -47,10 +46,21 @@ export class HomeLayoutComponent implements OnInit, AfterViewInit {
 
   getProducts(): void {
     this.productsService
-      .getAllWithQueryParams('image_attachment.blob,category')
+      .getAllWithQueryParams('image_attachment.blob,category,master')
       .subscribe((prodsResponse) => {
         this.products = prodsResponse.data;
         this.store.dispatch(addProducts({ products: this.products }));
+      });
+  }
+
+  getProductsByCategory(category: ICategory): void {
+    this.productsService
+      .getProductsByCategory(
+        'image_attachment.blob,category,master',
+        category.id
+      )
+      .subscribe((prodsResponse) => {
+        this.products = prodsResponse.data;
       });
   }
 }
