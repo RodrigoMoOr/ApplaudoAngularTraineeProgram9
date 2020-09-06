@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import { IProduct } from './../../interfaces/products.interface';
+import { ProductsService } from './../../services/products.service';
+import { IAPIResponse } from '../../interfaces/api-response.interface';
 
 @Component({
   selector: 'app-product',
@@ -10,7 +12,15 @@ import { IProduct } from './../../interfaces/products.interface';
 export class ProductComponent implements OnInit {
   @Input() product: IProduct;
 
-  constructor() {}
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {}
+
+  likeProduct(kind: string): void {
+    this.productsService
+      .postLikeToProduct(this.product.id, kind)
+      .subscribe((likeResponse: IAPIResponse) => {
+        console.log(likeResponse);
+      });
+  }
 }

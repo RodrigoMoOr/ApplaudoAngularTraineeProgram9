@@ -29,4 +29,15 @@ export class ProductsService extends DataService {
       params,
     });
   }
+
+  postLikeToProduct(productId: number, kind: string): Observable<IAPIResponse> {
+    const data = new HttpParams({
+      fromObject: {
+        product_id: productId.toString(),
+        kind,
+      },
+    });
+
+    return this.http.post<IAPIResponse>(environment.apiUrl + '/likes', data);
+  }
 }
