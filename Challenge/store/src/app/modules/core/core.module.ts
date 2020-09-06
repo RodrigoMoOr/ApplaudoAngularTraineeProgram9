@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,6 +15,7 @@ import { AppGuard } from './guards/app.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { InfoCardComponent } from './components/info-card/info-card.component';
+import { TokenInterceptorService } from './../shared/interceptors/app.interceptor';
 
 @NgModule({
   declarations: [NavbarComponent, InfoCardComponent],
@@ -29,7 +30,17 @@ import { InfoCardComponent } from './components/info-card/info-card.component';
     MatButtonModule,
   ],
   exports: [NavbarComponent],
-  providers: [AuthService, NavbarService, AppGuard, AuthGuard],
+  providers: [
+    AuthService,
+    NavbarService,
+    AppGuard,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   entryComponents: [InfoCardComponent],
 })
 export class CoreModule {}

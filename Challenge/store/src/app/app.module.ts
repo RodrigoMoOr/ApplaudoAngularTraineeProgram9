@@ -34,7 +34,6 @@ import * as fromProducts from './store/reducers/product.reducers';
     }),
     EffectsModule.forRoot([UserEffects]),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

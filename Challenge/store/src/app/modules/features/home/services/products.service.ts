@@ -25,19 +25,17 @@ export class ProductsService extends DataService {
       },
     });
 
-    return this.http.get<IAPIResponse>(environment.apiUrl + '/products', {
+    return this.http.get<IAPIResponse>(environment.apiUrl + 'products', {
       params,
     });
   }
 
   postLikeToProduct(productId: number, kind: string): Observable<IAPIResponse> {
-    const data = new HttpParams({
-      fromObject: {
-        product_id: productId.toString(),
-        kind,
-      },
-    });
+    const data = {
+      product_id: productId.toString(),
+      kind,
+    };
 
-    return this.http.post<IAPIResponse>(environment.apiUrl + '/likes', data);
+    return this.http.post<IAPIResponse>(environment.apiUrl + 'likes', { data });
   }
 }

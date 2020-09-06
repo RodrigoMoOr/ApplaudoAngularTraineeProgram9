@@ -5,13 +5,12 @@ import {
   HttpHandler,
   HttpEvent,
   HttpErrorResponse,
-  HttpHeaders,
 } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
   constructor() {}
 
@@ -19,13 +18,16 @@ export class TokenInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const headers = new HttpHeaders({
-      token: localStorage.getItem('token'),
-    });
+    const token = localStorage.getItem('token');
 
-    const reqClone = req.clone({ headers });
-
-    return next.handle(reqClone).pipe(catchError(this.handleError));
+    if (token) {
+      const reqClone = req.clone({
+        headers: req.headers.set('Authorization', 'Bearer ' + token),
+      });
+      return next.handle(reqClone);
+    } else {
+      return next.handle(req);
+    }
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
