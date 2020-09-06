@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
@@ -24,10 +25,11 @@ export class UserEffects {
         ofType(logout),
         tap((action) => {
           localStorage.removeItem('user');
+          this.router.navigate(['/login']);
         })
       ),
     { dispatch: false }
   );
 
-  constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions, private router: Router) {}
 }

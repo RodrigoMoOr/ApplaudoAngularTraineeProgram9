@@ -25,7 +25,6 @@ export class AppGuard implements CanActivate {
       select(isLogged),
       tap((logged) => {
         if (!logged) {
-          console.log('passed thorugh guard');
           this.router.navigate(['/login']);
         }
       })
