@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { AuthService } from './services/auth.service';
 import { NavbarService } from './services/navbar.service';
+import { AppGuard } from './guards/app.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { NavbarComponent } from './compoenets/navbar/navbar.component';
 import { InfoCardComponent } from './compoenets/info-card/info-card.component';
 
@@ -27,7 +29,7 @@ import { InfoCardComponent } from './compoenets/info-card/info-card.component';
     MatButtonModule,
   ],
   exports: [NavbarComponent],
-  providers: [AuthService, NavbarService],
+  providers: [AuthService, NavbarService, AppGuard, AuthGuard],
   entryComponents: [InfoCardComponent],
 })
 export class CoreModule {}
