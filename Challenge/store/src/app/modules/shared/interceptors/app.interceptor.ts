@@ -24,13 +24,13 @@ export class TokenInterceptorService implements HttpInterceptor {
       const reqClone = req.clone({
         headers: req.headers.set('Authorization', 'Bearer ' + token),
       });
-      return next.handle(reqClone);
+      return next.handle(reqClone).pipe(catchError(this.handleError));
     } else {
-      return next.handle(req);
+      return next.handle(req).pipe(catchError(this.handleError));
     }
   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
-    return throwError(new HttpErrorResponse(error));
+    return throwError('Whoops! Something went wrong\n' + error.message);
   }
 }

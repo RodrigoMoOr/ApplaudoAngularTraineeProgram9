@@ -18,8 +18,13 @@ mat-card {
   margin-top: 16px;
   width: 100%;
 
+  mat-card-header {
+    justify-content: center;
+  }
+
   mat-card-content {
     display: grid;
+    margin-top: 16px;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
   }
@@ -27,5 +32,29 @@ mat-card {
   mat-card-actions {
     display: flex;
     justify-content: space-around;
+  }
+
+  mat-card-actions:last-child {
+    padding-bottom: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  mat-card {
+    margin: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  mat-card {
+    width: 60%;
+    margin: 32px auto;
+  }
+}
+
+@media (min-width: 2560px) {
+  mat-card {
+    width: 30%;
+    margin: 32px auto;
   }
 }

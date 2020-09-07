@@ -4,6 +4,15 @@ mat-card {
   img {
     background-color: white;
   }
+
+  mat-card-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  mat-card-actions:last-child {
+    padding-bottom: 16px;
+  }
 }
 
 @media (min-width: 768px) {

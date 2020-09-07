@@ -1,3 +1,4 @@
+import { selectAllProducts } from './../../../../../store/selectors/product.selectors';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 import { MatSidenav } from '@angular/material/sidenav';
@@ -11,6 +12,7 @@ import { NavbarService } from './../../../../core/services/navbar.service';
 import { AppState } from 'src/app/store/states/app.states';
 import { addCategories } from './../../../../../store/actions/category.actions';
 import { addProducts } from './../../../../../store/actions/product.actions';
+import { selectProductEntities } from 'src/app/store/reducers/product.reducers';
 
 @Component({
   selector: 'app-home-layout',
@@ -51,6 +53,7 @@ export class HomeLayoutComponent implements OnInit, AfterViewInit {
         this.products = prodsResponse.data;
         this.store.dispatch(addProducts({ products: this.products }));
       });
+    // this.products = this.store.select(selectProductEntities);
   }
 
   getProductsByCategory(category: ICategory): void {
