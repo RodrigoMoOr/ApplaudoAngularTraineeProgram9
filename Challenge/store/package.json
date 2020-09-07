@@ -7,14 +7,17 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "heroku build": "ng build --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.0.5",
     "@angular/cdk": "^10.2.0",
+    "@angular/cli": "~10.0.4",
     "@angular/common": "~10.0.5",
     "@angular/compiler": "~10.0.5",
+    "@angular/compiler-cli": "~10.0.5",
     "@angular/core": "~10.0.5",
     "@angular/forms": "~10.0.5",
     "@angular/material": "^10.2.0",
@@ -25,9 +28,16 @@
     "@ngrx/entity": "^10.0.0",
     "@ngrx/store": "^10.0.0",
     "@ngrx/store-devtools": "^10.0.0",
+    "express": "^4.17.1",
+    "path": "^0.12.7",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
+    "typescript": "~3.9.5",
     "zone.js": "~0.10.3"
+  },
+  "engines": {
+    "node": "12.18.1",
+    "npm": "6.14.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1000.4",
