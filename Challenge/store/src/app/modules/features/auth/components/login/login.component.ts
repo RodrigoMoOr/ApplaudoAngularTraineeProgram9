@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from './../../../../core/services/auth.service';
+import { IUser } from 'src/app/modules/core/interfaces/api-responses.interface';
 import { SnackbarComponent } from './../snackbar/snackbar.component';
-import { ILoginResponse } from '../../../../core/interfaces/api-responses.interface';
-import { UserState } from '../../../../../store/states/user.states';
+import { UserState } from 'src/app/store/states/user.states';
 import { login } from 'src/app/store/actions/user.actions';
 
 @Component({
@@ -19,6 +17,7 @@ import { login } from 'src/app/store/actions/user.actions';
 })
 export class LoginComponent implements OnInit {
   title = 'Login to Store';
+  user: Observable<IUser>;
 
   /**
    * I prefer this way of building forms over form builder
@@ -31,34 +30,18 @@ export class LoginComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private snackBar: MatSnackBar,
-    private store: Store<UserState>
-  ) {}
+  constructor(private snackBar: MatSnackBar, private store: Store<UserState>) {}
 
   ngOnInit(): void {}
 
   login(): void {
-    this.authService.login(this.loginForm.value).subscribe(
-      (loginRespone: ILoginResponse) => {
-        if (loginRespone && loginRespone.token) {
-          this.openSnackBar('Login successful');
-          this.store.dispatch(login({ user: loginRespone.user }));
-          this.router.navigate(['/home']);
-        }
-      },
-      (error: HttpErrorResponse) => {
-        this.openSnackBar(error.message);
-      }
+    this.store.dispatch(
+      login({
+        credentials: {
+          email: this.loginForm.get('email').value,
+          password: this.loginForm.get('password').value,
+        },
+      })
     );
-  }
-
-  private openSnackBar(message: string): void {
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      data: message,
-      duration: 3000,
-    });
   }
 }

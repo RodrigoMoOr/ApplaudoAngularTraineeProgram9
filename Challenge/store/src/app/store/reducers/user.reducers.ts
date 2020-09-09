@@ -5,12 +5,12 @@ import * as UserActions from '../actions/user.actions';
 
 const appUserReducer = createReducer(
   UserStates.initialAppState,
-  on(UserActions.login, (state, action) => {
-    return { user: action.user };
+  on(UserActions.loginSuccess, (state, { login }) => {
+    return { user: login.user, token: login.token };
   }),
 
   on(UserActions.logout, () => {
-    return { user: undefined, cart: undefined };
+    return { user: undefined, token: undefined };
   })
 );
 

@@ -1,3 +1,4 @@
+import { loginSuccess } from './../../../store/actions/user.actions';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -13,7 +14,6 @@ import { Store, select } from '@ngrx/store';
 import { IUser } from '../interfaces/api-responses.interface';
 import { UserState } from './../../../store/states/user.states';
 import { isLogged } from './../../../store/selectors/user.selectors';
-import { login } from 'src/app/store/actions/user.actions';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -24,8 +24,16 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> {
     const userExists: IUser = JSON.parse(localStorage.getItem('user'));
+    const tokenExist: string = JSON.parse(localStorage.getItem('token'));
     if (userExists !== null) {
-      this.store.dispatch(login({ user: userExists }));
+      this.store.dispatch(
+        loginSuccess({
+          login: {
+            user: userExists,
+            token: tokenExist,
+          },
+        })
+      );
       return this.store.pipe(
         select(isLogged),
         tap((logged) => {

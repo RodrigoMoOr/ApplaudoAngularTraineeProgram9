@@ -22,6 +22,7 @@ export class AuthService {
   readonly isLogged$ = this.isLogged.asObservable();
 
   private BASE_URL = environment.apiUrl;
+  private path = 'users/login';
 
   constructor(private http: HttpClient) {
     this.getLoggedStatus();
@@ -32,11 +33,10 @@ export class AuthService {
       data: credentials,
     };
     return this.http
-      .post<IAPIResponse>(this.BASE_URL + '/users/login', loginPayload)
+      .post<IAPIResponse>(this.BASE_URL + this.path, loginPayload)
       .pipe(
         map((response: IAPIResponse) => {
           if (response.data) {
-            localStorage.setItem('token', response.data.token);
             return response.data;
           }
         }),
