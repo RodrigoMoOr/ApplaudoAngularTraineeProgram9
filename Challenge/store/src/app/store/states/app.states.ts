@@ -1,12 +1,12 @@
-import { Category } from './category.states';
-import { Product } from './product.states';
+import { CategoryState } from './category.states';
+import { ProductState } from './product.states';
 
 export interface AppState {
-  categories: Category[];
-  products: Product[];
+  categories: CategoryState;
+  products: ProductState;
 }
 
 export const initialAppState: AppState = {
-  categories: undefined,
-  products: undefined,
+  categories: undefined, // If these don't work use initial states for each
+  products: undefined, // If these don't work use initial states for each
 };

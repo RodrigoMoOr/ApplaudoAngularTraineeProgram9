@@ -1,4 +1,3 @@
-import { updateProduct } from './../../../../../store/actions/product.actions';
 import { Component, OnInit, Input } from '@angular/core';
 
 import { Store } from '@ngrx/store';
@@ -6,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { IProduct } from './../../interfaces/products.interface';
 import { ProductsService } from './../../services/products.service';
 import { IAPIResponse } from '../../interfaces/api-response.interface';
-import { ProductsState } from 'src/app/store/states/product.states';
+import { ProductState } from 'src/app/store/states/product.states';
+import { ILike } from './../../interfaces/likes-response.interface';
 
 @Component({
   selector: 'app-product',
@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productsService: ProductsService,
-    private store: Store<ProductsState>
+    private store: Store<ProductState>
   ) {}
 
   ngOnInit(): void {}
@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
   likeProduct(kind: string): void {
     this.productsService
       .postLikeToProduct(this.product.id, kind)
-      .subscribe((likeResponse: IAPIResponse) => {
+      .subscribe((likeResponse: ILike) => {
         console.log(likeResponse);
       });
   }

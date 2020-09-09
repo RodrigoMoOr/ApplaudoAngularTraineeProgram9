@@ -6,10 +6,10 @@ export interface Category {
   name: string;
 }
 
-export interface CategoriesState extends EntityState<Category> {}
+export interface CategoryState extends EntityState<Category> {}
 
-export const categoriesAdapter: EntityAdapter<Category> = createEntityAdapter<
+export const categoryAdapter: EntityAdapter<Category> = createEntityAdapter<
   Category
 >();
 
-export const initialCategoriesState: CategoriesState = categoriesAdapter.getInitialState();
+export const initialCategoryState: CategoryState = categoryAdapter.getInitialState();

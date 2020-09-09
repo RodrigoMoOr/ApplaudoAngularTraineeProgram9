@@ -13,8 +13,7 @@
       </mat-list-item>
       <mat-list-item
         role="listitem"
-        *ngFor="let category of categories"
-        (click)="getProductsByCategory(category)"
+        *ngFor="let category of categories | async"
       >
         <mat-icon mat-list-icon>category</mat-icon>
         <div mat-line>{{ category.name }}</div>
@@ -24,7 +23,7 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <app-product
-      *ngFor="let product of products"
+      *ngFor="let product of products | async"
       [product]="product"
     ></app-product>
   </mat-sidenav-content>

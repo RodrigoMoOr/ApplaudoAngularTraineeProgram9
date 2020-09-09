@@ -1,18 +1,17 @@
-import { selectAllProducts } from './../../../../../store/selectors/product.selectors';
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
+import { Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Store } from '@ngrx/store';
 
 import { IProduct } from '../../interfaces/products.interface';
 import { ICategory } from './../../interfaces/categories.interface';
-import { ProductsService } from './../../services/products.service';
-import { CategoriesService } from './../../services/categories.service';
 import { NavbarService } from './../../../../core/services/navbar.service';
 import { AppState } from 'src/app/store/states/app.states';
-import { addCategories } from './../../../../../store/actions/category.actions';
-import { addProducts } from './../../../../../store/actions/product.actions';
-import { selectProductEntities } from 'src/app/store/reducers/product.reducers';
+import { getAllCategories } from 'src/app/store/actions/category.actions';
+import { getAllProducts } from 'src/app/store/actions/product.actions';
+import { allCategories } from 'src/app/store/selectors/category.selectors';
+import { allProducts } from 'src/app/store/selectors/product.selectors';
 
 @Component({
   selector: 'app-home-layout',
@@ -20,50 +19,40 @@ import { selectProductEntities } from 'src/app/store/reducers/product.reducers';
   styleUrls: ['./home-layout.component.scss'],
 })
 export class HomeLayoutComponent implements OnInit, AfterViewInit {
-  products: IProduct[];
-  categories: ICategory[];
+  products: Observable<IProduct[]> = this.store.select(allProducts);
+  categories: Observable<ICategory[]> = this.store.select(allCategories);
   @ViewChild('sidenav') public sidenav: MatSidenav;
 
   constructor(
-    private categoriesService: CategoriesService,
-    private productsService: ProductsService,
     private store: Store<AppState>,
     private navbarService: NavbarService
   ) {}
-  ngAfterViewInit(): void {
-    this.navbarService.setSidenav(this.sidenav);
-  }
 
   ngOnInit(): void {
     this.getCategories();
     this.getProducts();
   }
 
+  ngAfterViewInit(): void {
+    this.navbarService.setSidenav(this.sidenav);
+  }
+
   getCategories(): void {
-    this.categoriesService.getAll().subscribe((catResponse) => {
-      this.categories = catResponse.data;
-      this.store.dispatch(addCategories({ categories: this.categories }));
-    });
+    this.store.dispatch(getAllCategories());
   }
 
   getProducts(): void {
-    this.productsService
-      .getAllWithQueryParams('image_attachment.blob,category,master')
-      .subscribe((prodsResponse) => {
-        this.products = prodsResponse.data;
-        this.store.dispatch(addProducts({ products: this.products }));
-      });
-    // this.products = this.store.select(selectProductEntities);
+    this.store.dispatch(getAllProducts());
   }
 
-  getProductsByCategory(category: ICategory): void {
-    this.productsService
-      .getProductsByCategory(
-        'image_attachment.blob,category,master',
-        category.id
-      )
-      .subscribe((prodsResponse) => {
-        this.products = prodsResponse.data;
-      });
-  }
+  // getProductsByCategory(category: ICategory): void {
+  //   this.productsService
+  //     .getProductsByCategory(
+  //       'image_attachment.blob,category,master',
+  //       category.id
+  //     )
+  //     .subscribe((prodsResponse) => {
+  //       this.products = prodsResponse.data;
+  //     });
+  // }
 }

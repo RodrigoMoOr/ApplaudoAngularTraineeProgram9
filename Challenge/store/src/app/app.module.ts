@@ -9,10 +9,8 @@ import { CoreModule } from './modules/core/core.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
-import * as fromUser from './store/reducers/user.reducers';
-import { UserEffects } from './store/effects/user.effects';
-import * as fromCategories from './store/reducers/category.reducers';
-import * as fromProducts from './store/reducers/product.reducers';
+import { reducers } from './store/reducers';
+import { effects } from './store/effects/index';
 
 /**
  * Auth module is eagerly loaded due to its basic functionality
@@ -23,16 +21,12 @@ import * as fromProducts from './store/reducers/product.reducers';
     CoreModule,
     AuthModule,
     AppRoutingModule,
-    StoreModule.forRoot({
-      auth: fromUser.reducer,
-      catories: fromCategories.reducer,
-      products: fromProducts.reducer,
-    }),
+    StoreModule.forRoot(reducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot(effects),
   ],
   bootstrap: [AppComponent],
 })

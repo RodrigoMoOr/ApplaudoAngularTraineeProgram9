@@ -1,3 +1,3 @@
-export interface IAPIResponse {
-  data: any;
+export interface IAPIResponse<T> {
+  data: T;
 }

@@ -18,20 +18,20 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getRouteParams();
+    // this.getRouteParams();
   }
 
-  getRouteParams(): void {
-    this.route.paramMap.subscribe((params) => {
-      this.getProduct(params.get('name'));
-    });
-  }
+  // getRouteParams(): void {
+  //   this.route.paramMap.subscribe((params) => {
+  //     this.getProduct(params.get('name'));
+  //   });
+  // }
 
-  getProduct(slug: string): void {
-    this.productsService
-      .getBySlug(slug, 'image_attachment.blob,category,master')
-      .subscribe((response) => {
-        this.product = response.data;
-      });
-  }
+  // getProduct(slug: string): void {
+  //   this.productsService
+  //     .getBySlug(slug, 'image_attachment.blob,category,master')
+  //     .subscribe((response) => {
+  //       this.product = response.data;
+  //     });
+  // }
 }
