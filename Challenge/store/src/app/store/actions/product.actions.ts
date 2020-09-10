@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { Update } from '@ngrx/entity';
 
 import { Product } from '../states/product.states';
 
@@ -47,5 +46,5 @@ export const getProductByIdFailure = createAction(
 
 export const updateProduct = createAction(
   '[Home Page | Product Details Page] Like/Dislike Product',
-  props<{ update: Update<Product> }>()
+  props<{ productId: number; kind: string }>()
 );
