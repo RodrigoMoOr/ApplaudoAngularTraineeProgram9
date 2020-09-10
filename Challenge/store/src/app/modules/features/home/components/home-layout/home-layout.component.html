@@ -14,6 +14,7 @@
       <mat-list-item
         role="listitem"
         *ngFor="let category of categories | async"
+        (click)="getProductsByCategory(category)"
       >
         <mat-icon mat-list-icon>category</mat-icon>
         <div mat-line>{{ category.name }}</div>

@@ -18,4 +18,4 @@ export const loginFailure = createAction(
   props<{ error: Error }>()
 );
 
-export const logout = createAction('[Info Dialog] Logout');
+export const logout = createAction('[Navbar] Logout');

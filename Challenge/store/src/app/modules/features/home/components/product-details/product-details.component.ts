@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { Store } from '@ngrx/store';
+
 import { IProduct } from '../../interfaces/products.interface';
-import { ProductsService } from '../../services/products.service';
+import { ProductState } from 'src/app/store/states/product.states';
+import { getProductBySlug } from 'src/app/store/actions/product.actions';
+import { productById } from 'src/app/store/selectors/product.selectors';
 
 @Component({
   selector: 'app-product-details',
@@ -14,24 +18,27 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productsService: ProductsService
+    private store: Store<ProductState>
   ) {}
 
   ngOnInit(): void {
-    // this.getRouteParams();
+    this.getRouteParams();
   }
 
-  // getRouteParams(): void {
-  //   this.route.paramMap.subscribe((params) => {
-  //     this.getProduct(params.get('name'));
-  //   });
-  // }
+  getRouteParams(): void {
+    this.route.paramMap.subscribe((params) => {
+      this.getProduct(params.get('name'), +params.get('id'));
+    });
+  }
 
-  // getProduct(slug: string): void {
-  //   this.productsService
-  //     .getBySlug(slug, 'image_attachment.blob,category,master')
-  //     .subscribe((response) => {
-  //       this.product = response.data;
-  //     });
-  // }
+  getProduct(slug: string, id: number): void {
+    this.store.dispatch(getProductBySlug({ slug }));
+    /**
+     * TODO: solve undefined product
+     */
+    this.store.select(productById, id).subscribe((product) => {
+      console.log(product);
+      this.product = product;
+    });
+  }
 }

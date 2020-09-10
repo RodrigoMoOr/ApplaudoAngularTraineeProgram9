@@ -1,4 +1,9 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+  createFeatureSelector,
+  createSelector,
+  Action,
+  props,
+} from '@ngrx/store';
 
 import * as ProductStates from '../states/product.states';
 
@@ -14,3 +19,15 @@ export const selectProductsState = createFeatureSelector<
 >('products');
 
 export const allProducts = createSelector(selectProductsState, selectAll);
+
+export const productsByCategory = createSelector(
+  allProducts,
+  (products: ProductStates.Product[], categoryId: number) =>
+    products.filter((product) => product.category.id === categoryId)
+);
+
+export const productById = createSelector(
+  selectProductsState,
+  (state: ProductStates.ProductState, productId: number) =>
+    state.entities[productById]
+);

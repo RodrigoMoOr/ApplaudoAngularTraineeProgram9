@@ -1,3 +1,4 @@
+import { ICredentials } from './../../../../core/interfaces/login-credentials.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
@@ -17,7 +18,6 @@ import { login } from 'src/app/store/actions/user.actions';
 })
 export class LoginComponent implements OnInit {
   title = 'Login to Store';
-  user: Observable<IUser>;
 
   /**
    * I prefer this way of building forms over form builder
@@ -35,13 +35,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login(): void {
-    this.store.dispatch(
-      login({
-        credentials: {
-          email: this.loginForm.get('email').value,
-          password: this.loginForm.get('password').value,
-        },
-      })
-    );
+    const credentials: ICredentials = {
+      email: this.loginForm.get('email').value,
+      password: this.loginForm.get('password').value,
+    };
+    this.store.dispatch(login({ credentials }));
   }
 }

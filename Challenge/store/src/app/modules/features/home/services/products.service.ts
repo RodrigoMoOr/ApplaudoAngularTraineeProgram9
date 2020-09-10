@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { environment } from './../../../../../environments/environment';
+import { environment } from 'src/environments/environment';
 import { IAPIResponse } from './../interfaces/api-response.interface';
 import { IProduct } from '../interfaces/products.interface';
 import { ILike } from './../interfaces/likes-response.interface';

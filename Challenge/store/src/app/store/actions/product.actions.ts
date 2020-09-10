@@ -15,6 +15,36 @@ export const getAllProductsFailure = createAction(
   props<{ error: Error }>()
 );
 
+export const getProductsByCategory = createAction(
+  '[Home Layout] Get Products By Category',
+  props<{ categoryId: number }>()
+);
+
+export const getProductsByCategorySuccess = createAction(
+  '[Product Effects] Get Products By Category Success',
+  props<{ products: Product[] }>()
+);
+
+export const getProductsByCategoryFailure = createAction(
+  '[Product Effects] Get Products By Category Failure',
+  props<{ error: Error }>()
+);
+
+export const getProductBySlug = createAction(
+  '[Product Details] Gett Product By ID',
+  props<{ slug: string }>()
+);
+
+export const getProductByIdSuccess = createAction(
+  '[Product Effects] Get Product By ID Success',
+  props<{ product: Product }>()
+);
+
+export const getProductByIdFailure = createAction(
+  '[Product Effects] Get Product By ID Failure',
+  props<{ error: Error }>()
+);
+
 export const updateProduct = createAction(
   '[Home Page | Product Details Page] Like/Dislike Product',
   props<{ update: Update<Product> }>()

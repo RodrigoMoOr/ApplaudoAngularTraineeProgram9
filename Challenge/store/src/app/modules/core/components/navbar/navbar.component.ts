@@ -6,24 +6,21 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Store, select } from '@ngrx/store';
 
-import { AuthService } from '../../services/auth.service';
 import { InfoCardComponent } from '../info-card/info-card.component';
-import { UserState } from '../../../../store/states/user.states';
-import { isLogged } from '../../../../store/selectors/user.selectors';
-import { logout } from '../../../../store/actions/user.actions';
+import { UserState } from 'src/app/store/states/user.states';
+import { isLogged } from 'src/app/store/selectors/user.selectors';
+import { logout } from 'src/app/store/actions/user.actions';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit, OnDestroy {
+export class NavbarComponent implements OnInit {
   isLogged$: Observable<boolean>;
 
   constructor(
     private dialog: MatDialog,
-    private router: Router,
-    private authService: AuthService,
     private navbarService: NavbarService,
     private store: Store<UserState>
   ) {}
@@ -53,9 +50,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   logout(): void {
     this.store.dispatch(logout());
-    this.authService.logout();
-    // this.router.navigate(['/login']);
   }
-
-  ngOnDestroy(): void {}
 }

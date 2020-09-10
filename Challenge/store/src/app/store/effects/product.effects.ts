@@ -30,4 +30,36 @@ export class ProductEffects {
       )
     )
   );
+
+  getProductsByCategory$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.getProductsByCategory),
+      switchMap(({ categoryId }) =>
+        this.productsService.getProductsByCategory(categoryId).pipe(
+          catchError((error) =>
+            of(ProductActions.getAllProductsFailure(error))
+          ),
+          map((products: Product[]) => {
+            return ProductActions.getProductsByCategorySuccess({ products });
+          })
+        )
+      )
+    )
+  );
+
+  getProductById$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductActions.getProductBySlug),
+      switchMap(({ slug }) =>
+        this.productsService.getProductBySlug(slug).pipe(
+          catchError((error) =>
+            of(ProductActions.getProductByIdFailure(error))
+          ),
+          map((product: Product) => {
+            return ProductActions.getProductByIdSuccess({ product });
+          })
+        )
+      )
+    )
+  );
 }
