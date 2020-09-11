@@ -10,6 +10,10 @@ import { slider } from './router.animations';
 })
 export class AppComponent {
   prepareRoute(outlet: RouterOutlet): RouterOutlet {
-    return outlet;
+    return (
+      outlet &&
+      outlet.activatedRouteData &&
+      outlet.activatedRouteData['animation']
+    );
   }
 }

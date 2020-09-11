@@ -27,7 +27,7 @@ export const productsByCategory = createSelector(
 );
 
 export const productById = createSelector(
-  selectProductsState,
-  (state: ProductStates.ProductState, productId: number) =>
-    state.entities[productById]
+  allProducts,
+  (products: ProductStates.Product[], productId: number) =>
+    products.find((product) => product.id === productId)
 );

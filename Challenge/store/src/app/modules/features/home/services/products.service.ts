@@ -63,6 +63,24 @@ export class ProductsService {
       );
   }
 
+  getProductsByName(query: string): Observable<IProduct[]> {
+    const params = new HttpParams({
+      fromObject: {
+        include: this.resources,
+        'filter[name_cont]': query,
+      },
+    });
+
+    return this.http
+      .get<IAPIResponse<IProduct[]>>(this.BASE_URL + this.path, { params })
+      .pipe(
+        map((response: IAPIResponse<IProduct[]>) => {
+          return response.data;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
   postLikeToProduct(productId: number, kind: string): Observable<ILike> {
     const data = {
       product_id: productId.toString(),

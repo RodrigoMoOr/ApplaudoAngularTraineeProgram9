@@ -10,6 +10,7 @@ import {
   updateProduct,
 } from 'src/app/store/actions/product.actions';
 import { productById } from 'src/app/store/selectors/product.selectors';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-product-details',
@@ -17,7 +18,8 @@ import { productById } from 'src/app/store/selectors/product.selectors';
   styleUrls: ['./product-details.component.scss'],
 })
 export class ProductDetailsComponent implements OnInit {
-  product: IProduct;
+  product$: Observable<IProduct>;
+  productSubject = new BehaviorSubject<IProduct>(null);
 
   constructor(
     private route: ActivatedRoute,
@@ -36,16 +38,15 @@ export class ProductDetailsComponent implements OnInit {
 
   getProduct(slug: string, id: number): void {
     this.store.dispatch(getProductBySlug({ slug }));
-    /**
-     * TODO: solve undefined product
-     */
-    this.store.select(productById, id).subscribe((product) => {
-      console.log(product);
-      this.product = product;
+    this.product$ = this.store.select(productById, id);
+    this.product$.subscribe((product) => {
+      this.productSubject.next(product);
     });
   }
 
   updateProduct(kind: string): void {
-    this.store.dispatch(updateProduct({ productId: this.product.id, kind }));
+    this.store.dispatch(
+      updateProduct({ productId: this.productSubject.value.id, kind })
+    );
   }
 }

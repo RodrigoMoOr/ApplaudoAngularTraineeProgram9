@@ -41,7 +41,7 @@ function slideTo(
         [animate('2000ms ease', style({ [direction]: '100%' }))],
         optional
       ),
-      query(':enter', [animate('600ms ease', style({ [direction]: '0%' }))]),
+      query(':enter', [animate('2000ms ease', style({ [direction]: '0%' }))]),
     ]),
 
     query(':leave', animateChild()),
