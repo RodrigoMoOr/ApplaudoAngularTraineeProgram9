@@ -22,8 +22,9 @@
       </mat-list-item>
     </mat-list>
   </mat-sidenav>
-  <mat-sidenav-content @fade>
+  <mat-sidenav-content>
     <app-product
+      @fade
       *ngFor="let product of products | async"
       [product]="product"
     ></app-product>

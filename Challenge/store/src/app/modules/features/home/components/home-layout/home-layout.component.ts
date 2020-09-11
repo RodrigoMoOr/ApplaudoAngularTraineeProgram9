@@ -32,7 +32,7 @@ import {
   styleUrls: ['./home-layout.component.scss'],
   animations: [
     trigger('fade', [
-      transition('void => *', [style({ opacity: 0, width: 0 }), animate(2000)]),
+      transition('void => *', [style({ opacity: 0, width: 0 }), animate(1000)]),
     ]),
   ],
 })

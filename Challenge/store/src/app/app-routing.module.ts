@@ -5,7 +5,7 @@ import { LoginComponent } from './modules/features/auth/components/login/login.c
 import { AppGuard } from './modules/core/guards/app.guard';
 import { AuthGuard } from './modules/core/guards/auth.guard';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
@@ -14,19 +14,21 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard], // Doesn't work properly
   },
   {
     path: 'home',
     loadChildren: () =>
       import('./modules/features/home/home.module').then((m) => m.HomeModule),
     canActivate: [AppGuard],
+    data: { animation: 'isLeft' },
   },
   {
     path: 'cart',
     loadChildren: () =>
       import('./modules/features/cart/cart.module').then((m) => m.CartModule),
     canActivate: [AppGuard],
+    data: { aniamtion: 'isRight' },
   },
   {
     path: '**',
