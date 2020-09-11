@@ -1,6 +1,5 @@
 import { NavbarService } from './../../services/navbar.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -37,7 +36,7 @@ export class NavbarComponent implements OnInit {
     this.dialog
       .open(InfoCardComponent)
       .afterClosed()
-      .subscribe((result) => {
+      .subscribe((result: boolean) => {
         if (result) {
           this.logout();
         }

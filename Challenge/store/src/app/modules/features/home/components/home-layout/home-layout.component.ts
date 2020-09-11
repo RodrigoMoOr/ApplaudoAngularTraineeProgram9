@@ -1,4 +1,11 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  trigger,
+  state,
+  transition,
+  style,
+  animate,
+} from '@angular/animations';
 
 import { Observable } from 'rxjs';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -23,6 +30,11 @@ import {
   selector: 'app-home-layout',
   templateUrl: './home-layout.component.html',
   styleUrls: ['./home-layout.component.scss'],
+  animations: [
+    trigger('fade', [
+      transition('void => *', [style({ opacity: 0, width: 0 }), animate(2000)]),
+    ]),
+  ],
 })
 export class HomeLayoutComponent implements OnInit, AfterViewInit {
   products: Observable<IProduct[]>;

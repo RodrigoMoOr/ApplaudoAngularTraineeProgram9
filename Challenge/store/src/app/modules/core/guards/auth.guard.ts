@@ -24,8 +24,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> {
     const userExists: IUser = JSON.parse(localStorage.getItem('user'));
-    const tokenExist: string = JSON.parse(localStorage.getItem('token'));
-    if (userExists !== null) {
+    const tokenExist: string = localStorage.getItem('token');
+    if (userExists !== undefined) {
       this.store.dispatch(
         loginSuccess({
           login: {

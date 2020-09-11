@@ -10,7 +10,7 @@ describe('HomeLayoutComponent', () => {
   let component: HomeLayoutComponent;
   let fixture: ComponentFixture<HomeLayoutComponent>;
   let store: MockStore;
-  const initialState = { categories: {}, products: { filteredIds: [] } };
+  const initialState = { categories: {}, products: {} };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,4 +36,35 @@ describe('HomeLayoutComponent', () => {
     expect(list).toBeTruthy();
     expect(sidenavContent).toBeTruthy();
   });
+
+  it('should call getCategories() and getProducts() when component is initiated', () => {
+    spyOn(component, 'getCategories');
+    spyOn(component, 'getProducts');
+
+    component.ngOnInit();
+
+    expect(component.getCategories).toHaveBeenCalled();
+    expect(component.getProducts).toHaveBeenCalled();
+  });
+
+  it('should dispatch actions to get products and categories', () => {
+    spyOn(store, 'dispatch');
+
+    component.getCategories();
+    component.getProducts();
+
+    expect(store.dispatch).toHaveBeenCalled();
+  });
+
+  it('should dispatch action to filter products by category', () => {
+    spyOn(store, 'dispatch');
+
+    component.getProductsByCategory({ id: 1, slug: '', name: '' });
+
+    expect(store.dispatch).toHaveBeenCalled();
+  });
+
+  // it('should call openAddToCart() (method) to open Add to Cart Dialog', () => {});
+
+  // it('should dispatch action to filter products by name', () => {});
 });

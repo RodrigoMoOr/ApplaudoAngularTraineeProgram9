@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Add {{ product.name }} to Cart</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Quantity</mat-label>
+    <input matInput #quantity maxlength="3" placeholder="3" type="number" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button [mat-dialog-close]="true" color="accent">Add</button>
+</mat-dialog-actions>

@@ -4,7 +4,7 @@
   </mat-card-header>
   <img
     mat-card-image
-    [src]="product.image?.url || 'src/assets/images/def_product.jpg'"
+    [src]="product.image?.url || '../../../assets/images/def_product.jpg'"
     alt=""
   />
   <mat-card-content>
@@ -12,13 +12,13 @@
     <span>Published: {{ product.published_at | date }}</span>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-fab color="accent" (click)="likeProduct('up')">
+    <button mat-fab color="accent" (click)="updateProduct('up')">
       <mat-icon>thumb_up</mat-icon>
     </button>
-    <button mat-fab color="accent" (click)="likeProduct('down')">
+    <button mat-fab color="accent" (click)="updateProduct('down')">
       <mat-icon>thumb_down</mat-icon>
     </button>
-    <button mat-fab color="accent">
+    <button mat-fab color="accent" (click)="openAddToCartDialog()">
       <mat-icon>add_shopping_cart</mat-icon>
     </button>
   </mat-card-actions>

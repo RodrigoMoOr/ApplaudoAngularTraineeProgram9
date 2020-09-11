@@ -7,6 +7,7 @@ import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { MatButtonHarness } from '@angular/material/button/testing';
 
 import { ProductComponent } from './product.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 let loader: HarnessLoader;
 
@@ -18,6 +19,7 @@ describe('ProductComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [MatDialogModule],
       declarations: [ProductComponent],
       providers: [provideMockStore({ initialState })],
     }).compileComponents();
@@ -64,13 +66,22 @@ describe('ProductComponent', () => {
     expect(addToCart).toBeTruthy();
   });
 
-  it('should dispatch action when like or dislike is clicked', async () => {
+  it('should dispatch updateProduct action when like or dislike is clicked', async () => {
     spyOn(store, 'dispatch');
     const like = await loader.getHarness(MatButtonHarness);
 
-    like.click();
-    component.likeProduct('');
+    await like.click();
 
     expect(store.dispatch).toHaveBeenCalled();
+  });
+
+  it('should call openAddToCartDialog() when add to cart button is clicked', () => {
+    spyOn(component, 'openAddToCartDialog');
+    const buttons = fixture.debugElement.queryAll(By.css('button'));
+    const addToCart: HTMLButtonElement = buttons[2].nativeElement;
+
+    addToCart.click();
+
+    expect(component.openAddToCartDialog).toHaveBeenCalled();
   });
 });

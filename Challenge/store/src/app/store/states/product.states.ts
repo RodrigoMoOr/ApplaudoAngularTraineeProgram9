@@ -24,16 +24,10 @@ export interface Product {
   };
 }
 
-export interface ProductState extends EntityState<Product> {
-  filteredIds: number[];
-}
+export interface ProductState extends EntityState<Product> {}
 
 export const productAdapter: EntityAdapter<Product> = createEntityAdapter<
   Product
 >();
 
-export const initialProductsState: ProductState = productAdapter.getInitialState(
-  {
-    filteredIds: [],
-  }
-);
+export const initialProductsState: ProductState = productAdapter.getInitialState();

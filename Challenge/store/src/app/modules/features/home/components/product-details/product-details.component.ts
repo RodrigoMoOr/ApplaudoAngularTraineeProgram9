@@ -5,7 +5,10 @@ import { Store } from '@ngrx/store';
 
 import { IProduct } from '../../interfaces/products.interface';
 import { ProductState } from 'src/app/store/states/product.states';
-import { getProductBySlug } from 'src/app/store/actions/product.actions';
+import {
+  getProductBySlug,
+  updateProduct,
+} from 'src/app/store/actions/product.actions';
 import { productById } from 'src/app/store/selectors/product.selectors';
 
 @Component({
@@ -40,5 +43,9 @@ export class ProductDetailsComponent implements OnInit {
       console.log(product);
       this.product = product;
     });
+  }
+
+  updateProduct(kind: string): void {
+    this.store.dispatch(updateProduct({ productId: this.product.id, kind }));
   }
 }

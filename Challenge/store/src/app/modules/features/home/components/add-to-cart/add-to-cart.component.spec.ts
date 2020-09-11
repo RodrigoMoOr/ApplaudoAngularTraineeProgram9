@@ -1,19 +1,20 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { InfoCardComponent } from './info-card.component';
+// import { AddToCartComponent } from './add-to-cart.component';
 
-// describe('InfoCardComponent', () => {
-//   let component: InfoCardComponent;
-//   let fixture: ComponentFixture<InfoCardComponent>;
+// describe('AddToCartComponent', () => {
+//   let component: AddToCartComponent;
+//   let fixture: ComponentFixture<AddToCartComponent>;
 
 //   beforeEach(async(() => {
 //     TestBed.configureTestingModule({
-//       declarations: [InfoCardComponent],
-//     }).compileComponents();
+//       declarations: [ AddToCartComponent ]
+//     })
+//     .compileComponents();
 //   }));
 
 //   beforeEach(() => {
-//     fixture = TestBed.createComponent(InfoCardComponent);
+//     fixture = TestBed.createComponent(AddToCartComponent);
 //     component = fixture.componentInstance;
 //     fixture.detectChanges();
 //   });

@@ -15,10 +15,6 @@ const productReducer = createReducer(
 
   on(ProductActions.getProductByIdSuccess, (state, { product }) => {
     return ProductStates.productAdapter.upsertOne(product, state);
-  }),
-
-  on(ProductActions.updateProduct, (state, { update }) => {
-    return ProductStates.productAdapter.updateOne(update, state);
   })
 );
 
