@@ -6,7 +6,11 @@ import { HomeLayoutComponent } from './components/home-layout/home-layout.compon
 
 export const routes: Routes = [
   { path: '', component: HomeLayoutComponent },
-  { path: 'products/:name/:id', component: ProductDetailsComponent },
+  {
+    path: 'products/:name/:id',
+    component: ProductDetailsComponent,
+    data: { animation: 'isRight' },
+  },
 ];
 
 @NgModule({
