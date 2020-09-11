@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
 
 import { IProduct } from '../../interfaces/products.interface';
 import { ProductState } from 'src/app/store/states/product.states';
@@ -11,6 +12,7 @@ import {
 } from 'src/app/store/actions/product.actions';
 import { productById } from 'src/app/store/selectors/product.selectors';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 
 @Component({
   selector: 'app-product-details',
@@ -23,7 +25,8 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<ProductState>
+    private store: Store<ProductState>,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +51,11 @@ export class ProductDetailsComponent implements OnInit {
     this.store.dispatch(
       updateProduct({ productId: this.productSubject.value.id, kind })
     );
+  }
+
+  openAddToCartDialog(): void {
+    this.dialog.open(AddToCartComponent, {
+      data: { product: this.productSubject.value.name },
+    });
   }
 }

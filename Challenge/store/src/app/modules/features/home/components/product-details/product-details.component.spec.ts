@@ -7,8 +7,10 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Observable, Subject } from 'rxjs';
 import { MatButtonHarness } from '@angular/material/button/testing';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { ProductDetailsComponent } from './product-details.component';
+import { IProduct } from './../../interfaces/products.interface';
 
 let loader: HarnessLoader;
 
@@ -32,6 +34,7 @@ describe('ProductDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [MatDialogModule],
       declarations: [ProductDetailsComponent],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteStub },
@@ -45,36 +48,10 @@ describe('ProductDetailsComponent', () => {
     loader = TestbedHarnessEnvironment.loader(fixture);
     component = fixture.componentInstance;
     store = TestBed.inject(MockStore);
-    component.product = {
-      id: 1,
-      slug: '',
-      name: '',
-      description: '',
-      likes_up_count: 0,
-      likes_down_count: 0,
-      published_at: '',
-      category: {
-        id: 1,
-        slug: '',
-        name: '',
-      },
-      image: {
-        id: 1,
-        url: '',
-      },
-      master: {
-        price: '',
-        promotional_price: '',
-        stock: 1,
-      },
-    };
   });
 
   it('should dispatch getProductBySlug action when params are obtained', () => {
     spyOn(store, 'dispatch');
-
-    const route: ActivatedRouteStub = TestBed.get(ActivatedRoute);
-    route.push({ name: '', id: 0 });
 
     component.getProduct('', 0);
 
@@ -102,6 +79,30 @@ describe('ProductDetailsComponent', () => {
     spyOn(store, 'dispatch');
     const like = await loader.getHarness(MatButtonHarness);
     console.log(like);
+    component.productSubject.next({
+      id: 1,
+      slug: '',
+      name: '',
+      description: '',
+      likes_up_count: 0,
+      likes_down_count: 0,
+      published_at: '',
+      category: {
+        id: 1,
+        slug: '',
+        name: '',
+      },
+      image: {
+        id: 1,
+        url: '',
+      },
+      master: {
+        price: '',
+        promotional_price: '',
+        stock: 1,
+      },
+    });
+    fixture.detectChanges();
 
     await like.click();
 
